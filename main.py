@@ -4,12 +4,13 @@ import sys
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6 import uic
+from UI import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.create)
         self.setGeometry(600, 600, 800, 800)
         self.setFixedSize(self.size())
@@ -19,7 +20,7 @@ class Example(QMainWindow):
         if self.paint:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(QColor(255, 255, 0))
+            qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
             r = randint(0, 400)
             qp.drawEllipse(randint(0, 800 - r), randint(0, 600 - r), r, r)
             self.paint = False
